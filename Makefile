@@ -1,3 +1,3 @@
 
-go-log-exec:
-	go build -o go-log-exec *.go
+git-log-exec:
+	go build -o git-log-exec *.go
