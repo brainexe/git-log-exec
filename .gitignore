@@ -1,0 +1,5 @@
+vendor
+go.sum
+git-log-exec
+out.csv
+.idea
