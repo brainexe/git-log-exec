@@ -6,9 +6,7 @@ import (
 	"strings"
 )
 
-func getCommits(branch string, limit int, after string, before string) ([]entry, error) {
-	checkout(branch)
-
+func getCommits(limit int, after string, before string) ([]entry, error) {
 	args := []string{
 		"log",
 		"--pretty=\"%h %ct\"",
@@ -52,10 +50,4 @@ func getCommits(branch string, limit int, after string, before string) ([]entry,
 	fmt.Printf("Commits: %d, Step size: %d (%d commits to check)\n", len(lines), stepSize, len(commits))
 
 	return commits, nil
-}
-
-func checkout(branch string) error {
-	_, err := execute("git", "checkout", branch)
-
-	return err
 }
