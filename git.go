@@ -9,6 +9,7 @@ import (
 func getCommits(limit int, after string, before string) ([]entry, error) {
 	args := []string{
 		"log",
+		"--reverse",
 		"--pretty=\"%h %ct\"",
 	}
 	if after != "" {

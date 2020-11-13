@@ -35,6 +35,8 @@ func DumpHistory(directory string, command string, output io.Writer, limit int, 
 	if err != nil {
 		return err
 	}
+
+	// switch back to original branch
 	defer execute("git", "checkout", branch)
 
 	commits, err := getCommits(limit, after, before)
