@@ -14,6 +14,8 @@ import (
 const GitDir = "git_directory"
 
 func TestRemoteRepo(t *testing.T) {
+	os.Setenv("TZ", "UTC")
+
 	t.Run("slack-bot-1", func(t *testing.T) {
 		before := ""
 		after := "2019-09-04T17:14:43+02:00"

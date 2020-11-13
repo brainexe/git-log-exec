@@ -11,24 +11,20 @@ Executes any bash command on the whole git history and produces a CSV file out o
 ### Count *.go files in go/golang repo over time
 
 ```
-docker run -v ~/projects/golang:/repo  --rm brainexe/git-log-exec -command="find -iname *.go | wc -l" --limit 200
+docker run -v ~/projects/golang:/repo  --rm brainexe/git-log-exec -command="find . -type f -exec wc -l {} + | awk '{sum += \$1} END {print sum}'" --limit 10
 time,result,commit
-2020-11-13T10:36:40Z,6916,0c7f0e5448
-2020-09-01T17:38:07Z,6767,ab88d97deb
-2020-04-28T17:39:36Z,6764,bd01a1b756
-2020-02-27T21:33:33Z,6611,62ff72d876
-2019-11-07T19:14:38Z,6694,e1ddf0507c
-2019-09-07T21:44:30Z,6622,a5025fdcde
-2019-04-26T19:27:51Z,6818,2ae5e7f9bf
-2019-02-22T17:05:17Z,6485,b35dacaac5
-...
-2010-05-24T22:07:47Z,1252,c95e11db56
-2010-01-18T23:59:14Z,1027,16205a3534
-2009-11-02T18:50:18Z,858,d00248980b
-2009-07-28T21:54:49Z,623,6d3d25de21
-2009-03-27T05:16:06Z,447,34050ca8de
-2008-10-29T22:23:29Z,319,527669e6b1
-2008-06-04T21:37:38Z,37,0cafb9ea3d
+2020-11-11T20:51:00Z,18370046,141fa337ad
+2019-09-06T22:44:48Z,18420202,e6ba19f913
+2018-05-04T05:37:45Z,17437548,8c62fc0ca3
+2017-03-21T22:37:27Z,16800922,2730c17a86
+2016-03-21T08:59:18Z,16030762,cd187e9102
+2015-04-08T09:09:29Z,15659576,8ac129e530
+2014-01-12T01:20:16Z,15348792,c7ef348bad
+2012-08-23T04:30:18Z,15165626,6fd2febaef
+2011-07-19T00:54:32Z,14733336,95117d30a2
+2010-01-11T19:23:46Z,14236966,0ed728c48a
+2008-03-08T02:01:09Z,13399008,2aae3fcbaf
+
 ```
 
 ### Count files of homeassistant repo
