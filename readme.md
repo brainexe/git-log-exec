@@ -8,6 +8,7 @@ Executes any bash command on the whole git history and produces a CSV file out o
 
 ## Examples
 ### 1) Count files on remote repo
+Note: The docker container will first clone the repository (repo needs to be public+accessable!).
 ```
 docker run --rm brainexe/git-log-exec https://github.com/innogames/slack-bot.git -command="find -iname *.go | wc -l" --limit 10 
 Clone https://github.com/innogames/slack-bot.git into local docker container
@@ -32,7 +33,7 @@ time,result,commit
 ### 2) Count LOC on local repo over time
 Using golang/go repo as example:
 ```
-docker run -v .:/repo  --rm brainexe/git-log-exec -command="find . -type f -exec wc -l {} + | awk '{sum += \$1} END {print sum}'" --limit 10
+docker run -v $(pwd):/repo  --rm brainexe/git-log-exec -command="find . -type f -exec wc -l {} + | awk '{sum += \$1} END {print sum}'" --limit 10
 time,result,commit
 2010-01-07T03:36:28Z,14234142,7a5852b50e
 2011-07-18T02:59:16Z,14736460,a8e0035bd3
