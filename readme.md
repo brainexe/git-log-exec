@@ -29,10 +29,10 @@ time,result,commit
 2020-11-07T18:31:12Z,169,16469c3
 ```
 
-### 2) Count *.go files on local golang repo over time
-
+### 2) Count LOC on local repo over time
+Using golang/go repo as example:
 ```
-docker run -v ~/projects/golang:/repo  --rm brainexe/git-log-exec -command="find . -type f -exec wc -l {} + | awk '{sum += \$1} END {print sum}'" --limit 10
+docker run -v .:/repo  --rm brainexe/git-log-exec -command="find . -type f -exec wc -l {} + | awk '{sum += \$1} END {print sum}'" --limit 10
 time,result,commit
 2010-01-07T03:36:28Z,14234142,7a5852b50e
 2011-07-18T02:59:16Z,14736460,a8e0035bd3
