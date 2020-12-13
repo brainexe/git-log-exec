@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -40,7 +41,7 @@ func getCommits(limit int, after string, before string) ([]entry, error) {
 		if i%stepSize != 0 {
 			continue
 		}
-		parts := strings.Split(strings.ReplaceAll(line, "\"", ""), " ")
+		parts := strings.Split(strings.ReplaceAll(line, `"`, ""), " ")
 		timestamp, _ := strconv.Atoi(parts[1])
 		commits = append(commits, entry{
 			commit:    parts[0],
@@ -48,7 +49,7 @@ func getCommits(limit int, after string, before string) ([]entry, error) {
 		})
 	}
 
-	fmt.Printf("Commits: %d, Step size: %d (%d commits to check)\n", len(lines), stepSize, len(commits))
+	fmt.Fprintf(os.Stderr, "Commits: %d, Step size: %d (%d commits to check)\n", len(lines), stepSize, len(commits))
 
 	return commits, nil
 }

@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"time"
 
@@ -20,6 +22,7 @@ func DumpHistory(directory string, command string, output io.Writer, limit int, 
 	var err error
 
 	if command == "" {
+		flag.PrintDefaults()
 		return fmt.Errorf("No command given\n")
 	}
 
@@ -44,12 +47,19 @@ func DumpHistory(directory string, command string, output io.Writer, limit int, 
 		return err
 	}
 
-	bar := progressbar.New(len(commits))
+	bar := progressbar.NewOptions(len(commits), progressbar.OptionSetWriter(os.Stderr))
+
 	result := make([]entry, 0, len(commits))
 
 	for _, commit := range commits {
 		bar.Add(1)
-		result = append(result, evaluate(commit, command))
+
+		entity, err := evaluate(commit, command)
+		if err != nil {
+			log.Print(err)
+			continue
+		}
+		result = append(result, entity)
 	}
 
 	return writeCsv(result, output)
