@@ -14,7 +14,7 @@ func getCommits(limit int, after string, before string) ([]entry, error) {
 		"--pretty=\"%h %ct\"",
 	}
 	if after != "" {
-		args = append(args, fmt.Sprintf("--from='%s'", after))
+		args = append(args, fmt.Sprintf("--after='%s'", after))
 	}
 	if before != "" {
 		args = append(args, fmt.Sprintf("--before='%s'", before))

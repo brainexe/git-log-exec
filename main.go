@@ -43,7 +43,9 @@ func main() {
 	err = DumpHistory(directory, command, out, limit, after, before)
 	checkError(err)
 
-	fmt.Printf("\nWrote file %s\n", outputFile)
+	if !stdout {
+		fmt.Printf("\nWrote file %s\n", outputFile)
+	}
 }
 
 func checkError(err error) {
@@ -55,6 +57,9 @@ func checkError(err error) {
 
 func evaluate(commit entry, command string) (entry, error) {
 	if _, err := execute("git", "reset", "--hard"); err != nil {
+		return commit, err
+	}
+	if _, err := execute("git", "clean", "-d", "-f"); err != nil {
 		return commit, err
 	}
 	if _, err := execute("git", "checkout", commit.commit); err != nil {
