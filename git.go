@@ -38,7 +38,7 @@ func getCommits(limit int, after string, before string) ([]entry, error) {
 		if line == "" {
 			continue
 		}
-		if i%stepSize != 0 {
+		if i%stepSize != 0 && i != len(lines)-1 { // include every X once + the last one for sure
 			continue
 		}
 		parts := strings.Split(strings.ReplaceAll(line, `"`, ""), " ")
