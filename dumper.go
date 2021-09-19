@@ -72,7 +72,6 @@ func writeCsv(logs []entry, file io.Writer) error {
 		"result",
 		"commit",
 	})
-
 	if err != nil {
 		return err
 	}
