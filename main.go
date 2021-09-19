@@ -77,7 +77,6 @@ func evaluate(commit entry, command string) (entry, error) {
 func execute(name string, args ...string) (string, error) {
 	cmd := exec.Command(name, args...)
 	out, err := cmd.CombinedOutput()
-
 	if err != nil {
 		log.Fatalf("Command '%s' failed: %s: %s", cmd.String(), err, string(out))
 	}
